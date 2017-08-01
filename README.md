@@ -15,6 +15,21 @@ tools combine the functionality of several 'base' functions such as
 that are named in a way that is consistent with usage, making their
 names easy to remember and easy to deploy.
 
+Installation
+============
+
+To download the development version of **numform**:
+
+Download the [zip
+ball](https://github.com/trinker/numform/zipball/master) or [tar
+ball](https://github.com/trinker/numform/tarball/master), decompress and
+run `R CMD INSTALL` on it, or use the **pacman** package to install the
+development version:
+
+    if (!require("pacman")) install.packages("pacman")
+    pacman::p_load_current_gh("trinker/numform")
+    pacman::p_load(tidyverse)
+
 
 Table of Contents
 ============
@@ -33,24 +48,9 @@ Table of Contents
     -   [Plotting](#plotting)
     -   [Modeling](#modeling)
 
-Installation
+Contact
 ============
 
-
-To download the development version of **numform**:
-
-Download the [zip
-ball](https://github.com/trinker/numform/zipball/master) or [tar
-ball](https://github.com/trinker/numform/tarball/master), decompress and
-run `R CMD INSTALL` on it, or use the **pacman** package to install the
-development version:
-
-    if (!require("pacman")) install.packages("pacman")
-    pacman::p_load_current_gh("trinker/numform")
-    pacman::p_load(tidyverse)
-
-Contact
-=======
 
 You are welcome to:    
 - submit suggestions and bug-reports at: <https://github.com/trinker/numform/issues>    
@@ -71,186 +71,116 @@ return version that is prefixed with an additional `f`. For example,
 instead. This is useful for passing in to **ggplot2** `scale_x/y_type`
 functions (see [Plotting](#plotting) for usage).
 
+<<<<<<< HEAD
+<!-- html table generated in R 3.5.0 by xtable 1.8-2 package -->
+<!-- Fri Jul 28 14:23:14 2017 -->
+=======
 <!-- html table generated in R 3.4.0 by xtable 1.8-2 package -->
 
 <!-- Sat Jul 29 08:10:44 2017 -->
 
+>>>>>>> 29014295363f18cc650c163a409a960752278c84
 <table>
-
 <tr>
-
 <td>
-
 as_factor
 </td>
-
 <td>
-
 f_mean_sd
 </td>
-
 <td>
-
 f_pad_zero
 </td>
-
 <td>
-
 f_sign
 </td>
-
 <td>
-
 fv_percent_diff
 </td>
-
 </tr>
-
 <tr>
-
 <td>
-
 f_affix
 </td>
-
 <td>
-
 f_mills
 </td>
-
 <td>
-
 f_parenthesis
 </td>
-
 <td>
-
 f_suffix
 </td>
-
 <td>
-
 fv_runs
 </td>
-
 </tr>
-
 <tr>
-
 <td>
-
 f_bills
 </td>
-
 <td>
-
 f_month
 </td>
-
 <td>
-
 f_percent
 </td>
-
 <td>
-
 f_thous
 </td>
-
 <td>
-
 </td>
-
 </tr>
-
 <tr>
-
 <td>
-
 f_comma
 </td>
-
 <td>
-
 f_num
 </td>
-
 <td>
-
 f_prefix
 </td>
-
 <td>
-
 f_weekday
 </td>
-
 <td>
-
 </td>
-
 </tr>
-
 <tr>
-
 <td>
-
 f_denom
 </td>
-
 <td>
-
 f_num_percent
 </td>
-
 <td>
-
 f_prop2percent
 </td>
-
 <td>
-
 fv_num_percent
 </td>
-
 <td>
-
 </td>
-
 </tr>
-
 <tr>
-
 <td>
-
 f_dollar
 </td>
-
 <td>
-
 f_ordinal
 </td>
-
 <td>
-
 f_pval
 </td>
-
 <td>
-
 fv_percent
 </td>
-
 <td>
-
 </td>
-
 </tr>
-
 </table>
-
 <p class="caption">
-
 <b><em>Available Formatting Functions</em></b>
 </p>
 
@@ -429,36 +359,23 @@ Tables
             Team = fv_runs(Team),
             WinLossRate = f_num(WinLossRate, 1)
         ) %>%
+        as.data.frame() %>%    
         pander::pander(split.tables = Inf, justify = c('left', rep('right', ncol(dat))))
 
 <table>
-
 <colgroup>
-
 <col width="11%" />
-
 <col width="7%" />
-
 <col width="12%" />
-
 <col width="6%" />
-
 <col width="7%" />
-
 <col width="15%" />
-
 <col width="10%" />
-
 <col width="11%" />
-
 <col width="16%" />
-
 </colgroup>
-
 <thead>
-
 <tr class="header">
-
 <th align="left">Team</th>
 <th align="right">Year</th>
 <th align="right">YearStart</th>
@@ -469,13 +386,9 @@ Tables
 <th align="right">PropLost</th>
 <th align="right">ChangeWinLoss</th>
 </tr>
-
 </thead>
-
 <tbody>
-
 <tr class="odd">
-
 <td align="left">West Coast</td>
 <td align="right">2012</td>
 <td align="right">$2.0M</td>
@@ -486,9 +399,7 @@ Tables
 <td align="right">9%</td>
 <td align="right">0%</td>
 </tr>
-
 <tr class="even">
-
 <td align="left"></td>
 <td align="right">2013</td>
 <td align="right">$1.8M</td>
@@ -499,9 +410,7 @@ Tables
 <td align="right">20%</td>
 <td align="right">-13%</td>
 </tr>
-
 <tr class="odd">
-
 <td align="left"></td>
 <td align="right">2014</td>
 <td align="right">$ .6M</td>
@@ -512,9 +421,7 @@ Tables
 <td align="right">48%</td>
 <td align="right">11%</td>
 </tr>
-
 <tr class="even">
-
 <td align="left"></td>
 <td align="right">2015</td>
 <td align="right">$1.4M</td>
@@ -525,9 +432,7 @@ Tables
 <td align="right">19%</td>
 <td align="right">-13%</td>
 </tr>
-
 <tr class="odd">
-
 <td align="left">East Coast</td>
 <td align="right">2012</td>
 <td align="right">$2.3M</td>
@@ -538,9 +443,7 @@ Tables
 <td align="right">18%</td>
 <td align="right">0%</td>
 </tr>
-
 <tr class="even">
-
 <td align="left"></td>
 <td align="right">2013</td>
 <td align="right">$2.4M</td>
@@ -551,9 +454,7 @@ Tables
 <td align="right">16%</td>
 <td align="right">86%</td>
 </tr>
-
 <tr class="odd">
-
 <td align="left"></td>
 <td align="right">2014</td>
 <td align="right">$ .8M</td>
@@ -564,9 +465,7 @@ Tables
 <td align="right">9%</td>
 <td align="right">811%</td>
 </tr>
-
 <tr class="even">
-
 <td align="left"></td>
 <td align="right">2015</td>
 <td align="right">$1.6M</td>
@@ -577,11 +476,8 @@ Tables
 <td align="right">26%</td>
 <td align="right">-86%</td>
 </tr>
-
 </tbody>
-
 </table>
-
 
 Plotting
 --------
@@ -607,18 +503,18 @@ Plotting
             facet_wrap(~site) +
             theme_bw()
 
-    ## # A tibble: 10,000 × 8
+    ## # A tibble: 10,000 x 8
     ##     revenue       date   site  dollar thous thous_dollars abb_month
     ##       <dbl>     <date>  <chr>   <chr> <chr>         <chr>     <chr>
-    ## 1  518104.4 1999-06-09 Site 5 $518000  518K         $518K         J
-    ## 2  412045.7 1999-03-11 Site 4 $412000  412K         $412K         M
-    ## 3  483772.8 1999-03-27 Site 2 $484000  484K         $484K         M
-    ## 4  467421.9 1999-07-04 Site 4 $467000  467K         $467K         J
-    ## 5  554327.6 1999-12-30 Site 3 $554000  554K         $554K         D
-    ## 6  461872.8 1999-10-16 Site 1 $462000  462K         $462K         O
-    ## 7  458566.9 1999-02-11 Site 3 $459000  459K         $459K         F
-    ## 8  541723.7 1999-09-02 Site 1 $542000  542K         $542K         S
-    ## 9  451617.4 1999-04-16 Site 3 $452000  452K         $452K         A
+    ##  1 518104.4 1999-06-09 Site 5 $518000  518K         $518K         J
+    ##  2 412045.7 1999-03-11 Site 4 $412000  412K         $412K         M
+    ##  3 483772.8 1999-03-27 Site 2 $484000  484K         $484K         M
+    ##  4 467421.9 1999-07-04 Site 4 $467000  467K         $467K         J
+    ##  5 554327.6 1999-12-30 Site 3 $554000  554K         $554K         D
+    ##  6 461872.8 1999-10-16 Site 1 $462000  462K         $462K         O
+    ##  7 458566.9 1999-02-11 Site 3 $459000  459K         $459K         F
+    ##  8 541723.7 1999-09-02 Site 1 $542000  542K         $542K         S
+    ##  9 451617.4 1999-04-16 Site 3 $452000  452K         $452K         A
     ## 10 498559.2 1999-12-26 Site 2 $499000  499K         $499K         D
     ## # ... with 9,990 more rows, and 1 more variables: abb_week <fctr>
 

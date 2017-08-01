@@ -1,4 +1,4 @@
-fa11e762dfe8f73551e84048f4331dec *DESCRIPTION
+d6e23f537f0e58221c5d7cac227c613a *DESCRIPTION
 ff4b476e7d85ac4bab75a272ab30a770 *NAMESPACE
 a78450217093c18b61313c0a0662c81a *NEWS
 58ab26da2b83e6f8f7edf27e248bf9a1 *R/as_factor.R
@@ -21,8 +21,8 @@ b8f784df2fb8d797feef3f2045ce20fb *R/fv_percent.R
 0e60f2c49b9e1bd9baee33b88dbb7d0a *R/fv_runs.R
 f40e6c87a1f7b857785f80d4fbed4ee5 *R/numform-package.R
 ed55d1abed67363942b06a8c9a8190f7 *R/utils.R
-180f4bd38adfce1b8e8282d3fee83424 *README.md
-d3e5433ba995cc018ec1969cf2b78cb4 *inst/CITATION
+09defc0bacac3e30753526cbb1488660 *README.md
+6bb86d2d83b4072f1728d41704cb8e4f *inst/CITATION
 8831f2d7bfefe3b70e7159e3ab0c020b *inst/digit_logo/r_digit.pptx
 61b61c4c45695c201ac78f4b48ed8675 *inst/figure/unnamed-chunk-10-1.png
 d80051cbff3839cee0e67eeb27b2956f *inst/figure/unnamed-chunk-11-1.png
@@ -54,4 +54,6 @@ c1561b5dc8807116bfe79698b9ae19f6 *man/fv_num_percent.Rd
 427d48e79e4929b3c0c3b6248233f0de *tests/testthat/test-f_num.R
 73a8c174c793fb4babe4aaec90b87ac6 *tests/testthat/test-f_ordinal.R
 4bf71b1ad868df01c053aafa0013e0d0 *tests/testthat/test-f_pval.R
-62dc266affad91f05cb6cc2f2a1cd1db *tools/figure/unnamed-chunk-13-1.png
+2a5061ca477f0cd6d32c28544267c21e *tools/figure/unnamed-chunk-13-1.png
+2a5061ca477f0cd6d32c28544267c21e *tools/figure/unnamed-chunk-14-1.png
+2a5061ca477f0cd6d32c28544267c21e *tools/figure/unnamed-chunk-35-1.png
