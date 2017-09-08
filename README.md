@@ -7,28 +7,13 @@ Status](https://travis-ci.org/trinker/numform.svg?branch=master)](https://travis
 [![Coverage
 Status](https://coveralls.io/repos/trinker/numform/badge.svg?branch=master)](https://coveralls.io/r/trinker/numform?branch=master)
 
-**numform** contains tools to assist in the formatting of numbers for
-publication. Tools include the removal of leading zeros, standardization
-of number of digits, addition of affixes, and a p-value formatter. These
-tools combine the functionality of several 'base' functions such as
-`paste()`, `format()`, and `sprintf()` into specific use case functions
-that are named in a way that is consistent with usage, making their
-names easy to remember and easy to deploy.
-
-Installation
-============
-
-To download the development version of **numform**:
-
-Download the [zip
-ball](https://github.com/trinker/numform/zipball/master) or [tar
-ball](https://github.com/trinker/numform/tarball/master), decompress and
-run `R CMD INSTALL` on it, or use the **pacman** package to install the
-development version:
-
-    if (!require("pacman")) install.packages("pacman")
-    pacman::p_load_current_gh("trinker/numform")
-    pacman::p_load(tidyverse)
+**numform** contains tools to assist in the formatting of numbers and
+plots for publication. Tools include the removal of leading zeros,
+standardization of number of digits, addition of affixes, and a p-value
+formatter. These tools combine the functionality of several 'base'
+functions such as `paste()`, `format()`, and `sprintf()` into specific
+use case functions that are named in a way that is consistent with
+usage, making their names easy to remember and easy to deploy.
 
 
 Table of Contents
@@ -48,9 +33,24 @@ Table of Contents
     -   [Plotting](#plotting)
     -   [Modeling](#modeling)
 
-Contact
+Installation
 ============
 
+
+To download the development version of **numform**:
+
+Download the [zip
+ball](https://github.com/trinker/numform/zipball/master) or [tar
+ball](https://github.com/trinker/numform/tarball/master), decompress and
+run `R CMD INSTALL` on it, or use the **pacman** package to install the
+development version:
+
+    if (!require("pacman")) install.packages("pacman")
+    pacman::p_load_current_gh("trinker/numform")
+    pacman::p_load(tidyverse, gridExtra)
+
+Contact
+=======
 
 You are welcome to:    
 - submit suggestions and bug-reports at: <https://github.com/trinker/numform/issues>    
@@ -71,116 +71,248 @@ return version that is prefixed with an additional `f`. For example,
 instead. This is useful for passing in to **ggplot2** `scale_x/y_type`
 functions (see [Plotting](#plotting) for usage).
 
-<<<<<<< HEAD
-<!-- html table generated in R 3.5.0 by xtable 1.8-2 package -->
-<!-- Fri Jul 28 14:23:14 2017 -->
-=======
-<!-- html table generated in R 3.4.0 by xtable 1.8-2 package -->
+<!-- html table generated in R 3.4.1 by xtable 1.8-2 package -->
 
-<!-- Sat Jul 29 08:10:44 2017 -->
+<!-- Thu Sep 07 23:12:34 2017 -->
 
->>>>>>> 29014295363f18cc650c163a409a960752278c84
 <table>
+
 <tr>
+
 <td>
-as_factor
+
+alignment
 </td>
+
 <td>
-f_mean_sd
-</td>
-<td>
-f_pad_zero
-</td>
-<td>
-f_sign
-</td>
-<td>
-fv_percent_diff
-</td>
-</tr>
-<tr>
-<td>
+
 f_affix
 </td>
+
 <td>
+
 f_mills
 </td>
+
 <td>
-f_parenthesis
-</td>
-<td>
-f_suffix
-</td>
-<td>
-fv_runs
-</td>
-</tr>
-<tr>
-<td>
-f_bills
-</td>
-<td>
-f_month
-</td>
-<td>
-f_percent
-</td>
-<td>
-f_thous
-</td>
-<td>
-</td>
-</tr>
-<tr>
-<td>
-f_comma
-</td>
-<td>
-f_num
-</td>
-<td>
+
 f_prefix
 </td>
+
 <td>
-f_weekday
+
+f_title
 </td>
-<td>
-</td>
+
 </tr>
+
 <tr>
+
 <td>
-f_denom
+
+as_factor
 </td>
+
 <td>
-f_num_percent
+
+f_bills
 </td>
+
 <td>
+
+f_month
+</td>
+
+<td>
+
 f_prop2percent
 </td>
+
 <td>
-fv_num_percent
+
+f_weekday
 </td>
-<td>
-</td>
+
 </tr>
+
 <tr>
+
 <td>
-f_dollar
+
+constant_months
 </td>
+
 <td>
-f_ordinal
+
+f_comma
 </td>
+
 <td>
+
+f_num
+</td>
+
+<td>
+
 f_pval
 </td>
+
 <td>
+
+f_wrap
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+constant_months_abbreviation
+</td>
+
+<td>
+
+f_date
+</td>
+
+<td>
+
+f_num_percent
+</td>
+
+<td>
+
+f_replace
+</td>
+
+<td>
+
+f_year
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+constant_weekdays
+</td>
+
+<td>
+
+f_denom
+</td>
+
+<td>
+
+f_ordinal
+</td>
+
+<td>
+
+f_sign
+</td>
+
+<td>
+
+fv_num_percent
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+f_12_hour
+</td>
+
+<td>
+
+f_dollar
+</td>
+
+<td>
+
+f_pad_zero
+</td>
+
+<td>
+
+f_state
+</td>
+
+<td>
+
 fv_percent
 </td>
-<td>
-</td>
+
 </tr>
+
+<tr>
+
+<td>
+
+f_abbreviation
+</td>
+
+<td>
+
+f_logical
+</td>
+
+<td>
+
+f_parenthesis
+</td>
+
+<td>
+
+f_suffix
+</td>
+
+<td>
+
+fv_percent_diff
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+f_affirm
+</td>
+
+<td>
+
+f_mean_sd
+</td>
+
+<td>
+
+f_percent
+</td>
+
+<td>
+
+f_thous
+</td>
+
+<td>
+
+fv_runs
+</td>
+
+</tr>
+
 </table>
+
 <p class="caption">
+
 <b><em>Available Formatting Functions</em></b>
 </p>
 
@@ -199,9 +331,6 @@ Numbers
 -------
 
     f_num(c(0.0, 0, .2, -00.02, 1.122222, pi, "A"))
-
-    ## Warning in f_num(c(0, 0, 0.2, -0.02, 1.122222, pi, "A")): NAs introduced by
-    ## coercion
 
     ## [1] ".0"  ".0"  ".2"  "-.0" "1.1" "3.1" NA
 
@@ -333,6 +462,9 @@ do job.
 Tables
 ------
 
+Notice the use of the `alignment` function to detect the column
+alignment.
+
     pacman::p_load(dplyr, pander)
 
     set.seed(10)
@@ -350,7 +482,11 @@ Tables
 
     dat %>%
         group_by(Team) %>%
-        mutate(ChangeWinLoss = fv_percent_diff(WinLossRate, 0)) %>%
+        mutate(
+            `%&Delta;WinLoss` = fv_percent_diff(WinLossRate, 0),
+            `&Delta;WinLoss` = f_sign(Won - Lost, '<b>+</b>', '<b>&ndash;</b>')
+            
+        ) %>%
         ungroup() %>%
         mutate_at(vars(Won:Lost), .funs = ff_denom(relative = -1, prefix = '$')) %>%
         mutate_at(vars(PropWon, PropLost), .funs = ff_prop2percent(digits = 0)) %>%
@@ -359,23 +495,39 @@ Tables
             Team = fv_runs(Team),
             WinLossRate = f_num(WinLossRate, 1)
         ) %>%
-        as.data.frame() %>%    
-        pander::pander(split.tables = Inf, justify = c('left', rep('right', ncol(dat))))
+        data.frame(stringsAsFactors = FALSE) %>%
+        pander::pander(split.tables = Inf, justify = alignment(.))
 
 <table>
+
 <colgroup>
-<col width="11%" />
-<col width="7%" />
-<col width="12%" />
-<col width="6%" />
-<col width="7%" />
-<col width="15%" />
+
 <col width="10%" />
+
+<col width="5%" />
+
+<col width="9%" />
+
+<col width="6%" />
+
+<col width="6%" />
+
 <col width="11%" />
-<col width="16%" />
+
+<col width="8%" />
+
+<col width="9%" />
+
+<col width="15%" />
+
+<col width="15%" />
+
 </colgroup>
+
 <thead>
+
 <tr class="header">
+
 <th align="left">Team</th>
 <th align="right">Year</th>
 <th align="right">YearStart</th>
@@ -384,11 +536,16 @@ Tables
 <th align="right">WinLossRate</th>
 <th align="right">PropWon</th>
 <th align="right">PropLost</th>
-<th align="right">ChangeWinLoss</th>
+<th align="right">X..Delta.WinLoss</th>
+<th align="right">X.Delta.WinLoss</th>
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr class="odd">
+
 <td align="left">West Coast</td>
 <td align="right">2012</td>
 <td align="right">$2.0M</td>
@@ -398,8 +555,11 @@ Tables
 <td align="right">17%</td>
 <td align="right">9%</td>
 <td align="right">0%</td>
+<td align="right"><b>+</b></td>
 </tr>
+
 <tr class="even">
+
 <td align="left"></td>
 <td align="right">2013</td>
 <td align="right">$1.8M</td>
@@ -409,8 +569,11 @@ Tables
 <td align="right">33%</td>
 <td align="right">20%</td>
 <td align="right">-13%</td>
+<td align="right"><b>+</b></td>
 </tr>
+
 <tr class="odd">
+
 <td align="left"></td>
 <td align="right">2014</td>
 <td align="right">$ .6M</td>
@@ -420,8 +583,11 @@ Tables
 <td align="right">87%</td>
 <td align="right">48%</td>
 <td align="right">11%</td>
+<td align="right"><b>+</b></td>
 </tr>
+
 <tr class="even">
+
 <td align="left"></td>
 <td align="right">2015</td>
 <td align="right">$1.4M</td>
@@ -431,8 +597,11 @@ Tables
 <td align="right">30%</td>
 <td align="right">19%</td>
 <td align="right">-13%</td>
+<td align="right"><b>+</b></td>
 </tr>
+
 <tr class="odd">
+
 <td align="left">East Coast</td>
 <td align="right">2012</td>
 <td align="right">$2.3M</td>
@@ -442,8 +611,11 @@ Tables
 <td align="right">9%</td>
 <td align="right">18%</td>
 <td align="right">0%</td>
+<td align="right"><b>–</b></td>
 </tr>
+
 <tr class="even">
+
 <td align="left"></td>
 <td align="right">2013</td>
 <td align="right">$2.4M</td>
@@ -453,8 +625,11 @@ Tables
 <td align="right">15%</td>
 <td align="right">16%</td>
 <td align="right">86%</td>
+<td align="right"><b>–</b></td>
 </tr>
+
 <tr class="odd">
+
 <td align="left"></td>
 <td align="right">2014</td>
 <td align="right">$ .8M</td>
@@ -464,8 +639,11 @@ Tables
 <td align="right">74%</td>
 <td align="right">9%</td>
 <td align="right">811%</td>
+<td align="right"><b>+</b></td>
 </tr>
+
 <tr class="even">
+
 <td align="left"></td>
 <td align="right">2015</td>
 <td align="right">$1.6M</td>
@@ -475,9 +653,13 @@ Tables
 <td align="right">30%</td>
 <td align="right">26%</td>
 <td align="right">-86%</td>
+<td align="right"><b>+</b></td>
 </tr>
+
 </tbody>
+
 </table>
+
 
 Plotting
 --------
@@ -519,6 +701,109 @@ Plotting
     ## # ... with 9,990 more rows, and 1 more variables: abb_week <fctr>
 
 ![](tools/figure/unnamed-chunk-13-1.png)
+
+    library(tidyverse); library(gridExtra)
+
+    set.seed(10)
+    dat <- data_frame(
+        level = c("not_involved", "somewhat_involved_single_group",
+            "somewhat_involved_multiple_groups", "very_involved_one_group",
+            "very_involved_multiple_groups"
+        ),
+        n = sample(1:10, length(level))
+    ) %>%
+        mutate(
+            level = factor(level, levels = unique(level)),
+            `%` = n/sum(n)
+        )
+
+    gridExtra::grid.arrange(
+
+        gridExtra::arrangeGrob(
+
+            dat %>%
+                ggplot(aes(level, `%`)) +
+                    geom_col() +
+                    labs(title = 'Very Sad', y = NULL) +
+                    theme(
+                        axis.text = element_text(size = 7),
+                        title = element_text(size = 9)
+                    ),
+
+           dat %>%
+                ggplot(aes(level, `%`)) +
+                    geom_col() +
+                    scale_x_discrete(labels = function(x) f_replace(x, '_', '\n')) +
+                    scale_y_continuous(labels = ff_prop2percent(digits = 0))  +
+                    labs(title = 'Underscore Split (Readable)', y = NULL) +
+                    theme(
+                        axis.text = element_text(size = 7),
+                        title = element_text(size = 9)
+                    ),
+
+            ncol = 2
+
+        ),
+        gridExtra::arrangeGrob(
+
+           dat %>%
+                ggplot(aes(level, `%`)) +
+                    geom_col() +
+                    scale_x_discrete(labels = function(x) f_title(f_replace(x))) +
+                    scale_y_continuous(labels = ff_prop2percent(digits = 0))  +
+                    labs(title = 'Underscore Replaced & Title (Capitalized Sadness)', y = NULL) +
+                    theme(
+                        axis.text = element_text(size = 7),
+                        title = element_text(size = 9)
+                    ),
+
+            dat %>%
+                ggplot(aes(level, `%`)) +
+                    geom_col() +
+                    scale_x_discrete(labels = function(x) f_wrap(f_title(f_replace(x)))) +
+                    scale_y_continuous(labels = ff_prop2percent(digits = 0))  +
+                    labs(title = 'Underscore Replaced, Title, & Wrapped (Happy)', y = NULL) +
+                    theme(
+                        axis.text = element_text(size = 7),
+                        title = element_text(size = 9)
+                    ),
+
+            ncol = 2
+
+        ), ncol = 1
+
+    )
+
+![](tools/figure/unnamed-chunk-14-1.png)
+
+    set.seed(10)
+    dat <- data_frame(
+        state = sample(state.name, 10),
+        value = sample(10:20, 10) ^ (7),
+        cols = sample(colors()[1:150], 10)
+    ) %>%
+        arrange(desc(value)) %>%
+        mutate(state = factor(state, levels = unique(state)))
+
+    dat %>%
+        ggplot(aes(state, value, fill = cols)) +
+            geom_col() +
+            scale_x_discrete(labels = f_state) +
+            scale_fill_identity() +
+            scale_y_continuous(labels = ff_denom(prefix = '$'), expand = c(0, 0), 
+                limits = c(0, max(dat$value) * 1.05)
+            ) +
+            theme_minimal() +
+            theme(
+                panel.grid.major.x = element_blank(),
+                axis.title.y = element_text(angle = 0)
+            ) +
+            labs(x = 'State', y = 'Cash\nFlow', 
+                title = f_title("look at how professional i look"),
+                subtitle = 'Subtitles: For that extra professional look.'
+            )
+
+![](tools/figure/unnamed-chunk-15-1.png)
 
 Modeling
 --------

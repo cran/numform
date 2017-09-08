@@ -1,9 +1,9 @@
-#' Format Months to One Letter Abbreviation
+#' Format Weekdays to One Letter Abbreviation
 #'
-#' Format long month name, integer, or date formats to a single capital letter.
+#' Format long weekday name, integer, or date formats to a single capital letter.
 #' Useful for plot scales as a way to save space.
 #'
-#' @param x A vector of month names, integers 1-12, or dates.
+#' @param x A vector of weekday names, integers 1-12, or dates.
 #' @param distinct logical.  If \code{TRUE} Sunday will be presented as \code{Su}
 #' and Thursday as \code{Th}.
 #' @param \ldots ignored.
@@ -48,7 +48,6 @@
 #'     scale_x_discrete(labels = f_weekday)
 #' }
 f_weekday <- function(x, distinct = FALSE, ...) {
-    distinct
     UseMethod('f_weekday')
 }
 
@@ -111,3 +110,10 @@ f_weekday.POSIXlt <- function(x, distinct = FALSE, ...) {
 
 short_weekdays_key <- structure(c("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"), .Names = c("Su",
 "M", "T", "W", "Th", "F", "S"))
+
+
+
+
+
+
+
