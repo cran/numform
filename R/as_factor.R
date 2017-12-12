@@ -5,7 +5,7 @@
 #'
 #' @param x A vector of weekdays or months.
 #' @param shift Shift the levels to the right or left.  Useful for setting the
-#' week begining to something besides Sunday.  Use -1 to set to Monday instead.
+#' week beginning to something besides Sunday.  Use -1 to set to Monday instead.
 #' @param \ldots ignored.
 #' @return Returns a factor vector with levels set.
 #' @export
@@ -43,7 +43,7 @@
 #'     site = sample(paste("Site", 1:5), 10000, TRUE)
 #' ) %>%
 #'     mutate(
-#'         dollar = f_dollar(revenue, digits = -3),
+#'         dollar = f_comma(f_dollar(revenue, digits = -3)),
 #'         thous = f_thous(revenue),
 #'         thous_dollars = f_thous(revenue, prefix = '$'),
 #'         abb_month = f_month(date),
@@ -78,7 +78,8 @@ fact_check <- list(
     weekday_1letter = c("Su", "M", "T", "W", "Th", "F", "S"),
     weekday_2letter = c("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"),
     weekday_3_letter = c("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"),
-    weekday_long = c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+    weekday_long = c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"),
+    quarter = paste0('Q', 1:14)
 )
 
 check_type <- function(x){
@@ -89,7 +90,7 @@ check_type <- function(x){
     mi <- length(fact_check) + 1
 
     while(!matches) {
-        matches <- all(stats::na.omit(x) %in% fact_check[[i]])
+        matches <- all(rm_na(x) %in% fact_check[[i]])
         type <- names(fact_check)[i]
         i <- i + 1
 

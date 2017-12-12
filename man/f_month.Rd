@@ -5,7 +5,9 @@
 \alias{f_month.default}
 \alias{f_month.numeric}
 \alias{f_month.Date}
-\alias{f_month.POSIXlt}
+\alias{f_month.POSIXt}
+\alias{f_month.hms}
+\alias{ff_month}
 \title{Format Months to One Letter Abbreviation}
 \usage{
 f_month(x, ...)
@@ -16,7 +18,11 @@ f_month(x, ...)
 
 \method{f_month}{Date}(x, ...)
 
-\method{f_month}{POSIXlt}(x, ...)
+\method{f_month}{POSIXt}(x, ...)
+
+\method{f_month}{hms}(x, ...)
+
+ff_month(...)
 }
 \arguments{
 \item{x}{A vector of month names, integers 1-12, or dates.}
@@ -48,7 +54,7 @@ dat <- data_frame(
 ) \%>\%
     count(month, area) \%>\%
     ungroup() \%>\%
-    mutate(month = factor(month, levels = month.name))
+    mutate(month = factor(month, levels = constant_months))
 
 ## without date formatting
 ggplot(dat, aes(month, n)) +

@@ -5,7 +5,8 @@
 \title{Detect Column Alignment}
 \usage{
 alignment(x, left = "left", right = ifelse(left == "l", "r", "right"),
-  additional.numeric = "^(<b>(&ndash;|\\\\+)</b>)$", sep = NULL, ...)
+  additional.numeric = "^((<b>(&ndash;|\\\\+)</b>)|<[0-9.\%-]+)$",
+  sep = NULL, ...)
 }
 \arguments{
 \item{x}{A \code{data.frame}.}
@@ -29,7 +30,7 @@ Returns a vector of lefts and rights or a string (if \code{sep} is not
 \description{
 Many of the specialized functions in numform can change the type of the data
 from numeric to character causing the table formatting functions in various
-add-on packages to improperly align the elements.  This function pases the
+add-on packages to improperly align the elements.  This function passes the
 columns with a regular expression to detect alignment regardless of column
 class.
 }

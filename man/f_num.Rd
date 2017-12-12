@@ -17,14 +17,14 @@ ff_num(...)
 globally via: \code{options(numformdigits = n)} where n is the number of
 digits beyond the decimal point to include.}
 
-\item{p}{A string to paste at the begining of the output from \code{f_num}.}
+\item{p}{A string to paste at the beginning of the output from \code{f_num}.}
 
 \item{s}{A string to paste at the end of the output from \code{f_num}.}
 
 \item{pad.char}{A character to use for leading padding if lengths of output
 are unequal.}
 
-\item{zero}{An value to insert in for zero values.}
+\item{zero}{A value to insert in for zero values.}
 
 \item{\ldots}{ignored.}
 }

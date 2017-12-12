@@ -10,7 +10,7 @@ as_factor(x, shift = 0, ...)
 \item{x}{A vector of weekdays or months.}
 
 \item{shift}{Shift the levels to the right or left.  Useful for setting the
-week begining to something besides Sunday.  Use -1 to set to Monday instead.}
+week beginning to something besides Sunday.  Use -1 to set to Monday instead.}
 
 \item{\ldots}{ignored.}
 }
@@ -55,7 +55,7 @@ data_frame(
     site = sample(paste("Site", 1:5), 10000, TRUE)
 ) \%>\%
     mutate(
-        dollar = f_dollar(revenue, digits = -3),
+        dollar = f_comma(f_dollar(revenue, digits = -3)),
         thous = f_thous(revenue),
         thous_dollars = f_thous(revenue, prefix = '$'),
         abb_month = f_month(date),

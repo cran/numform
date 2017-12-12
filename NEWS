@@ -17,6 +17,42 @@ And constructed with the following guidelines:
 * Bug fixes and misc changes bumps the patch
 
 
+
+numform 0.3.1 - 0.4.0
+----------------------------------------------------------------
+
+BUG FIXES
+
+* `f_12_hour` did not format correctly if the vector contained missing (`NA`)
+  values; see issue #12.
+
+NEW FEATURES
+
+* `f_year`, `f_12_hour`, `f_month`, and `f_weekday` (methods based functions)
+  did not previously have closure, function retuning, forms (i.e., `ff_` form)
+  making them inconsistent in usage.  These functions all have a closure, function
+  returning, form.
+
+* `f_quarter` added for working with business quarters.
+
+* `f_degree` and friends (`f_latitude`, `f_longitude`, `f_fahrenheit`, &
+  `f_celcius`) added for working with degrees in scales and tables.
+
+MINOR FEATURES
+
+* `f_wrap` picks up an `equal.lines` argument to add additional lines to make
+  each element have the same number of new line characters.  This is useful for
+  legend spacing.
+
+* `f_wrap` picks up a `collapse` argument to `paste` + `collapse` a vector before
+  processing.  This is useful wrapping subtitles or other longer text blocks.
+
+* `f_title` picks up an `upper` and `lower` argument to allow the user to supply
+  a vector of regexes to force to be upper/lower regardless of title case.
+
+
+
+
 numform 0.0.6 - 0.3.0
 ----------------------------------------------------------------
 

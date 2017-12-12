@@ -26,7 +26,7 @@
 #' ) %>%
 #'     count(month, area) %>%
 #'     ungroup() %>%
-#'     mutate(month = factor(month, levels = month.name))
+#'     mutate(month = factor(month, levels = constant_months))
 #'
 #' ## without date formatting
 #' ggplot(dat, aes(month, n)) +
@@ -70,12 +70,24 @@ f_month.Date <- function(x, ...) {
 
 #' @export
 #' @rdname f_month
-#' @method f_month POSIXlt
-f_month.POSIXlt <- function(x, ...) {
+#' @method f_month POSIXt
+f_month.POSIXt <- function(x, ...) {
     toupper(gsub("(^.)(.+)", "\\1", as.character(format(x, "%b"))))
 }
 
 
 
+#' @export
+#' @rdname f_month
+#' @method f_month hms
+f_month.hms <- function(x, ...) {
+    f_month.POSIXt(as.POSIXct(x))
+}
 
 
+
+#' @export
+#' @rdname f_month
+ff_month <- function(...) {
+    function(x) {f_month(x)}
+}

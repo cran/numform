@@ -2,7 +2,7 @@
 #'
 #' Many of the specialized functions in numform can change the type of the data
 #' from numeric to character causing the table formatting functions in various
-#' add-on packages to improperly align the elements.  This function pases the
+#' add-on packages to improperly align the elements.  This function passes the
 #' columns with a regular expression to detect alignment regardless of column
 #' class.
 #'
@@ -74,7 +74,7 @@
 #'     print(include.rownames = FALSE)
 #' }
 alignment <- function(x, left = 'left', right = ifelse(left == 'l', 'r', 'right'),
-    additional.numeric = '^(<b>(&ndash;|\\+)</b>)$', sep = NULL, ...){
+    additional.numeric = "^((<b>(&ndash;|\\+)</b>)|<[0-9.%-]+)$", sep = NULL, ...){
 
     stopifnot(is.data.frame(x))
 
@@ -96,6 +96,6 @@ right_align <- function(df, additional.numeric = NULL){
 }
 
 
-numregex <- '^(((\\$)?[0-9.,+-]+( ?%|[KMB])?)|([0-9/:.-T ]{5,}))$'
+numregex <- '^((((\\$)?[0-9.,+-]+( ?%|[KMB])?)|([0-9/:.-T ]{5,}))|(-?[0-9.]+(&deg;)?[WESNFC]?))$'
 
 
