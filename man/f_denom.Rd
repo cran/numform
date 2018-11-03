@@ -11,23 +11,26 @@
 \alias{ff_thous}
 \title{Abbreviate Numbers}
 \usage{
-f_denom(x, relative = 0, prefix = "", pad.char = ifelse(prefix == "", NA,
-  " "), ...)
+f_denom(x, relative = 0, prefix = "", pad.char = ifelse(prefix == "",
+  NA, " "), less.than.replace = FALSE, mix.denom = FALSE, ...)
 
 ff_denom(...)
 
 f_bills(x, relative = 0, digits = -9, prefix = "",
-  pad.char = ifelse(prefix == "", NA, " "), ...)
+  pad.char = ifelse(prefix == "", NA, " "), less.than.replace = FALSE,
+  ...)
 
 ff_bills(...)
 
 f_mills(x, relative = 0, digits = -6, prefix = "",
-  pad.char = ifelse(prefix == "", NA, " "), ...)
+  pad.char = ifelse(prefix == "", NA, " "), less.than.replace = FALSE,
+  ...)
 
 ff_mills(...)
 
 f_thous(x, relative = 0, digits = -3, prefix = "",
-  pad.char = ifelse(prefix == "", NA, " "), ...)
+  pad.char = ifelse(prefix == "", NA, " "), less.than.replace = FALSE,
+  ...)
 
 ff_thous(...)
 }
@@ -42,6 +45,16 @@ For example \code{relative = -1} moves one to the left while
 
 \item{pad.char}{A character to use for leading padding if lengths of output
 are unequal.  Use \code{NA} to forgo padding.}
+
+\item{less.than.replace}{logical.  If \code{TRUE} values lower than lowest
+place value will be replaced with a less than sign followed by the
+\code{integer} representation of the place value.  For example, if \code{"$0K"}
+then replacement will be \code{"<1K"}.}
+
+\item{mix.denom}{logical.  If \code{TRUE} then denominations can be mixed.
+Typically this is not a good idea for the sake of comparison.  It is most
+useful when there is a total row which is a sum of the column and this value's
+denomination exceeds the denomination of the rest of the column.}
 
 \item{digits}{The number of digits to round to.  Actual \code{digits}
 calculated as \code{digits} +  \code{relative}.}
@@ -67,6 +80,16 @@ denomination (B).
 denomination (B).
 }
 \examples{
+f_denom(c(12345, 12563, 191919), prefix = '$')
+f_denom(c(12345, 12563, 191919), prefix = '$', pad.char = '')
+f_denom(c(1234365, 122123563, 12913919), prefix = '$')
+f_denom(c(12343676215, 122126763563, 1291673919), prefix = '$')
+f_denom(c(NA, 2, 12343676215, 122126763563, 1291673919), prefix = '$')
+f_denom(c(NA, 2, 123436, 122126763, 1291673919), prefix = '$', mix.denom = TRUE)
+f_denom(c(NA, 2, 12343676215, 122126763563, 1291673919), prefix = '$', pad.char = '')
+f_denom(c(NA, 2, 12343676215, 122126763563, 1291673919), relative = 1, prefix = '$')
+f_denom(c(NA, 2, 12343676215, 122126763563, 1291673919), relative = 9, prefix = '$')
+f_denom(c(NA, 2, 12343676215, 122126763563, 1291673919), less.than.replace = TRUE)
 
 f_thous(1234)
 f_thous(12345)
@@ -83,7 +106,7 @@ f_bills(123456789123, -2) # round to hundreds
 f_bills(123456789123, +1) # round to tenths
 f_bills(123456789123, +2) # round to hundreths
 
-x <- c(3886902.8696, 4044584.0424, 6591893.2104, 591893.2104)
+x <- c(3886902.8696, 4044584.0424, 6591893.2104, 591893.2104, -3454678)
 f_mills(x)
 f_mills(x, 1)
 f_mills(x, 1, prefix = '$')
@@ -130,5 +153,46 @@ data_frame(
         geom_jitter(width = .2, height = 0, alpha = .2) +
         scale_y_continuous(label = ff_thous(prefix = '$'))+
         facet_wrap(~site)
+
+set.seed(10)
+data_frame(
+    w = paste(constant_months, rep(2016:2017, each = 12))[1:20] ,
+    x = rnorm(20, 200000, 75000)
+) \%>\%
+    {
+        a <- .
+        rbind(
+            a,
+            a \%>\%
+                mutate(w = 'Total') \%>\%
+                group_by(w) \%>\%
+                summarize(x = sum(x))
+        )
+    } \%>\%
+    mutate(
+        y = f_denom(x, prefix = '$'),
+        z = f_denom(x, mix.denom = TRUE, prefix = '$')
+    )  \%>\%
+    data.frame(stringsAsFactors = FALSE, check.names = FALSE) \%>\%
+    pander::pander(split.tables = Inf, justify = alignment(.))
+
+## Scale with mixed units
+library(tidyverse)
+library(numform)
+
+dat <- data_frame(
+    Value = c(111, 2345, 34567, 456789, 1000001, 1000000001),
+    Time = 1:6
+)
+
+## Uniform units
+ggplot(dat, aes(Time, Value)) +
+    geom_line() +
+    scale_y_continuous(labels = ff_denom( prefix = '$'))
+
+## Mixed units
+ggplot(dat, aes(Time, Value)) +
+    geom_line() +
+    scale_y_continuous(labels = ff_denom(mix.denom = TRUE, prefix = '$', pad.char = ''))
 }
 }

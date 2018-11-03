@@ -18,6 +18,72 @@ And constructed with the following guidelines:
 
 
 
+numform 0.4.1 - 0.5.0
+----------------------------------------------------------------
+
+BUG FIXES
+
+* Functions that enable the argument `less.than.replace = TRUE` would result in
+  the wrong solution if the input value was negative.  This has been corrected.
+
+* `f_quarter` didn't respect the `space` or `max` arguments for some methods.
+
+* `alignment` failed to align correctly if there were leading spaces.
+
+NEW FEATURES
+
+* `highlight_cells` added as a quick and dirty way to add cell font highlighting.
+
+* The `collapse` and `glue` functions from the **glue** package are reexported
+  for easy string manipulation.
+
+* `f_bin` (a.k.a. `f_interval`) added for turning `"[3,5)"` form from `cut` into
+  a more human readable for.  There are several different forms of `f_bin` so
+  use `?f_bin` to see them all.
+
+* `fv_percent_lead` added to work similar to `fv_percent_diff` but using the
+  formula T_n/T_n-1.
+
+* `fv_percent_lead_fixed_relative` & `fv_percent_diff_fixed_relative` added in
+  order to compute `fv_percent_lead` & `fv_percent_diff` but keeping the
+  comparison year as a constant rather than using the prior year in the vector
+  of elements.
+
+* `f_data` and friends (see `?f_data`) added to convert between data units.  For
+  example, move from  10,000,000,000 (Bytes) to 10GB (Gigabytes) instead.
+
+MINOR FEATURES
+
+* `f_denom` family of functions picks up a `less.than.replace` argument to
+  replace values that say zero with a less than sing followed by a one and then
+  the denomination.  For example, in `c(2, 1234)` the digit 2 becomes "<1K".
+
+* `f_denom` picks up a `mix.denom` argument to allow for the mixing of
+  denominations.  This is useful for tables with a total row that is a
+  denomination higher than the rest of the column.
+
+* `f_pp` added to lower typing on `f_prop2percent(digits = 0)` (a commonly used function and setting) and to also change
+  the default digits value to 0 as is typically used in plotting.
+
+* `constant_weekdays_abbreviation` added to provide an abbreviated form of
+  weekdays.
+
+* `f_month_name` & `f_month_abbreviation` added to convert to full name and
+  3 letter abbreviated month formats.
+
+* `f_weekday_name` & `f_weekday_abbreviation` added to convert to full name and
+  3 letter abbreviated weekday formats.
+
+
+CHANGES
+
+* The argument `less_than_replace` in `f_prop2percent` & `f_percent` has been
+  replaced with `less.than.replace` to make dot case consistent for arguments
+  across the package.
+
+
+
+
 numform 0.3.1 - 0.4.0
 ----------------------------------------------------------------
 

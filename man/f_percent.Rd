@@ -5,17 +5,23 @@
 \alias{ff_percent}
 \alias{f_prop2percent}
 \alias{ff_prop2percent}
+\alias{f_pp}
+\alias{ff_pp}
 \title{Format Percentages}
 \usage{
-f_percent(x, digits = getOption("numformdigits"), less_than_replace = FALSE,
-  ...)
+f_percent(x, digits = getOption("numformdigits"),
+  less.than.replace = FALSE, ...)
 
 ff_percent(...)
 
 f_prop2percent(x, digits = getOption("numformdigits"),
-  less_than_replace = FALSE, ...)
+  less.than.replace = FALSE, ...)
 
 ff_prop2percent(...)
+
+f_pp(x, digits = 0, less.than.replace = FALSE, ...)
+
+ff_pp(...)
 }
 \arguments{
 \item{x}{A vector of proportions.}
@@ -24,8 +30,8 @@ ff_prop2percent(...)
 globally via: \code{options(numformdigits = n)} where n is the number of
 digits beyond the decimal point to include.}
 
-\item{less_than_replace}{logical.  If \code{TRUE} values lower than lowest
-place value, specified by \code{digits}, will be replaces with a less than
+\item{less.than.replace}{logical.  If \code{TRUE} values lower than lowest
+place value, specified by \code{digits}, will be replaced with a less than
 sign followed by the \code{double} representation of the place value
 specified by \code{digits}.  For example, if \code{digits = 0} then
 replacement will be \code{"<1\%"} or if \code{digits = 2} then replacement will
@@ -37,21 +43,25 @@ be \code{"<.01\%"}.}
 Returns a string of publication ready digits.
 }
 \description{
-\code{f_percent} - A wraf_percenter for \code{\link[numform]{f_num}} that formats
+\code{f_percent} - A wrapper for \code{\link[numform]{f_num}} that formats
 percent values as labeled percentages.
 
 \code{f_prop2percent} - A wrapper for \code{\link[numform]{f_num}} that formats
 proportions as labeled percentages.
+
+\code{f_pp} - A wrapper for \code{\link[numform]{f_prop2percent}} that requires
+less typing and has \code{digits} set to \code{0} by default.
 }
 \examples{
 f_percent(c(30, 33.45, .1))
 f_percent(c(30, 33.45, .1), 1)
 f_percent(c(0.0, 0, .2, -00.02, 1.122222, pi))
 f_prop2percent(c(.30, 1, 1.01, .33, .222, .01))
+f_pp(c(.30, 1, 1.01, .33, .222, .01))
 
-f_percent(c(30, 33.45, .1), digits = 0, less_than_replace = TRUE)
+f_percent(c(30, 33.45, .1), digits = 0, less.than.replace = TRUE)
 f_prop2percent(c(.30, 1, 1.01, .33, .222, .01, .0001, NA), digits = 0,
-    less_than_replace = TRUE)
+    less.than.replace = TRUE)
 
 \dontrun{
 if (!require("pacman")) install.packages("pacman")

@@ -74,7 +74,7 @@
 #'     print(include.rownames = FALSE)
 #' }
 alignment <- function(x, left = 'left', right = ifelse(left == 'l', 'r', 'right'),
-    additional.numeric = "^((<b>(&ndash;|\\+)</b>)|<[0-9.%-]+)$", sep = NULL, ...){
+    additional.numeric = "^((<b>(&ndash;|\\+)</b>)|(<?([0-9.%-]+)|(\\$?\\s*\\d+[KBM])))$", sep = NULL, ...){
 
     stopifnot(is.data.frame(x))
 
@@ -91,7 +91,7 @@ right_align <- function(df, additional.numeric = NULL){
         x <- as.character(x)
         if (!is.null(additional.numeric)) numregex <- paste(paste0('(', unlist(c(numregex, additional.numeric, additional.numeric)), ')'), collapse = "|")
 
-        grepl(numregex, rm_na(x)[1])
+        grepl(numregex, trimws(rm_na(x)[1]))
     })))
 }
 

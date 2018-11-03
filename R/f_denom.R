@@ -14,18 +14,29 @@
 #' @param prefix A string to append to the front of elements.
 #' @param pad.char A character to use for leading padding if lengths of output
 #' are unequal.  Use \code{NA} to forgo padding.
+#' @param less.than.replace logical.  If \code{TRUE} values lower than lowest
+#' place value will be replaced with a less than sign followed by the
+#' \code{integer} representation of the place value.  For example, if \code{"$0K"}
+#' then replacement will be \code{"<1K"}.
+#' @param mix.denom logical.  If \code{TRUE} then denominations can be mixed.
+#' Typically this is not a good idea for the sake of comparison.  It is most
+#' useful when there is a total row which is a sum of the column and this value's
+#' denomination exceeds the denomination of the rest of the column.
 #' @param \ldots ignored.
 #' @return Returns an abbreviated vector of numbers.
 #' @export
 #' @rdname f_denom
 #' @examples
-## f_denom(c(12345, 12563, 191919), prefix = '$')
-## f_denom(c(12345, 12563, 191919), prefix = '$', pad.char = '')
-## f_denom(c(1234365, 122123563, 12913919), prefix = '$')
-## f_denom(c(12343676215, 122126763563, 1291673919), prefix = '$')
-## f_denom(c(NA, 2, 12343676215, 122126763563, 1291673919), prefix = '$')
-## f_denom(c(NA, 2, 12343676215, 122126763563, 1291673919), relative = 1, prefix = '$')
-## f_denom(c(NA, 2, 12343676215, 122126763563, 1291673919), relative = 9, prefix = '$')
+#' f_denom(c(12345, 12563, 191919), prefix = '$')
+#' f_denom(c(12345, 12563, 191919), prefix = '$', pad.char = '')
+#' f_denom(c(1234365, 122123563, 12913919), prefix = '$')
+#' f_denom(c(12343676215, 122126763563, 1291673919), prefix = '$')
+#' f_denom(c(NA, 2, 12343676215, 122126763563, 1291673919), prefix = '$')
+#' f_denom(c(NA, 2, 123436, 122126763, 1291673919), prefix = '$', mix.denom = TRUE)
+#' f_denom(c(NA, 2, 12343676215, 122126763563, 1291673919), prefix = '$', pad.char = '')
+#' f_denom(c(NA, 2, 12343676215, 122126763563, 1291673919), relative = 1, prefix = '$')
+#' f_denom(c(NA, 2, 12343676215, 122126763563, 1291673919), relative = 9, prefix = '$')
+#' f_denom(c(NA, 2, 12343676215, 122126763563, 1291673919), less.than.replace = TRUE)
 #'
 #' f_thous(1234)
 #' f_thous(12345)
@@ -42,7 +53,7 @@
 #' f_bills(123456789123, +1) # round to tenths
 #' f_bills(123456789123, +2) # round to hundreths
 #'
-#' x <- c(3886902.8696, 4044584.0424, 6591893.2104, 591893.2104)
+#' x <- c(3886902.8696, 4044584.0424, 6591893.2104, 591893.2104, -3454678)
 #' f_mills(x)
 #' f_mills(x, 1)
 #' f_mills(x, 1, prefix = '$')
@@ -89,21 +100,97 @@
 #'         geom_jitter(width = .2, height = 0, alpha = .2) +
 #'         scale_y_continuous(label = ff_thous(prefix = '$'))+
 #'         facet_wrap(~site)
+#'
+#' set.seed(10)
+#' data_frame(
+#'     w = paste(constant_months, rep(2016:2017, each = 12))[1:20] ,
+#'     x = rnorm(20, 200000, 75000)
+#' ) %>%
+#'     {
+#'         a <- .
+#'         rbind(
+#'             a,
+#'             a %>%
+#'                 mutate(w = 'Total') %>%
+#'                 group_by(w) %>%
+#'                 summarize(x = sum(x))
+#'         )
+#'     } %>%
+#'     mutate(
+#'         y = f_denom(x, prefix = '$'),
+#'         z = f_denom(x, mix.denom = TRUE, prefix = '$')
+#'     )  %>%
+#'     data.frame(stringsAsFactors = FALSE, check.names = FALSE) %>%
+#'     pander::pander(split.tables = Inf, justify = alignment(.))
+#'
+#' ## Scale with mixed units
+#' library(tidyverse)
+#' library(numform)
+#'
+#' dat <- data_frame(
+#'     Value = c(111, 2345, 34567, 456789, 1000001, 1000000001),
+#'     Time = 1:6
+#' )
+#'
+#' ## Uniform units
+#' ggplot(dat, aes(Time, Value)) +
+#'     geom_line() +
+#'     scale_y_continuous(labels = ff_denom( prefix = '$'))
+#'
+#' ## Mixed units
+#' ggplot(dat, aes(Time, Value)) +
+#'     geom_line() +
+#'     scale_y_continuous(labels = ff_denom(mix.denom = TRUE, prefix = '$', pad.char = ''))
 #' }
-f_denom <- function(x, relative = 0, prefix = "", pad.char = ifelse(prefix == "", NA, " "), ...) {
+f_denom <- function(x, relative = 0, prefix = "", pad.char = ifelse(prefix == "", NA, " "),
+    less.than.replace = FALSE, mix.denom = FALSE, ...) {
 
     #if (missing(pad.char)) pad.char <- ifelse(prefix == "", NA, " ")
+    neglocs <- x < 0
+
+    if (mix.denom) {
+
+        nas <- is.na(x)
+        ## recurse the function on individual elements
+        out <- unlist(lapply(x, f_denom))
+
+        out <- gsub('(^[^0-9-]*\\s*)(\\d+[MBK])', '\\2', out)
+        if (!is.na(pad.char)){
+            chars <- nchar(out)
+            m <- max(chars, na.rm = TRUE)
+            out <- paste0(
+                prefix,
+                sapply(chars, function(x) {
+                    if (is.na(x)) return(NA)
+                    paste(rep(pad.char, m - x), collapse = '')
+                }),
+                out
+            )
+        }
+        out[nas] <- NA
+
+        if (isTRUE(less.than.replace)){
+            neglocs <- grepl('(^[^0-9]*\\s*)(\\d+)($)', out) & neglocs
+
+            out <- gsub('(^[^0-9]*\\s*)(\\d+)($)', '\\1<1K', out)
+
+            out[neglocs] <- gsub('(^[^0-9]*\\s*)(<)(-\\d+[KBM])', '\\1>\\3', out[neglocs])
+        }
+        return(out)
+    }
+
+    if (length(x) == 1 && is.na(x)) return(NA)
 
     md <- max(nchar(round(x, 0)), na.rm = TRUE)
     digs <- ifelse(md <= 6, 'thous', ifelse(md <= 9, 'mills', ifelse(md <= 12, 'bills', NA)))
     if (is.na(digs)) stop("Element(s) in `x` are greater than 12 digits.")
 
-    if (max(x,na.rm =TRUE) < 1e3) return(x)
+    if (max(abs(x), na.rm = TRUE) < 1e3) return(x)
 
     fun <- switch(digs,
-        thous = {ff_thous(relative = relative, prefix =prefix, pad.char = pad.char)},
-        mills = {ff_mills(relative = relative, prefix =prefix, pad.char = pad.char)},
-        bills = {ff_bills(relative = relative, prefix =prefix, pad.char = pad.char)}
+        thous = {ff_thous(relative = relative, prefix = prefix, pad.char = pad.char, less.than.replace = less.than.replace)},
+        mills = {ff_mills(relative = relative, prefix = prefix, pad.char = pad.char, less.than.replace = less.than.replace)},
+        bills = {ff_bills(relative = relative, prefix = prefix, pad.char = pad.char, less.than.replace = less.than.replace)}
     )
 
     fun(x)
@@ -116,16 +203,19 @@ f_denom <- function(x, relative = 0, prefix = "", pad.char = ifelse(prefix == ""
 ff_denom <- functionize(f_denom)
 
 
+
+
+
 #' @description \code{f_bills} - Force the abbreviation to the billions
 #' denomination (B).
 #' @export
 #' @include utils.R
 #' @rdname f_denom
 f_bills <- function(x, relative = 0, digits = -9, prefix = "",
-    pad.char = ifelse(prefix == '', NA, ' '), ...) {
+    pad.char = ifelse(prefix == '', NA, ' '), less.than.replace = FALSE, ...) {
 
     #if (missing(pad.char)) pad.char <- ifelse(prefix == '', NA, ' ')
-
+    neglocs <- x < 0
     digits <- digits + relative
     nas <- is.na(x)
 
@@ -139,6 +229,31 @@ f_bills <- function(x, relative = 0, digits = -9, prefix = "",
     x <- ifelse(x == '.', '0B', x)
     if (!is.na(pad.char)) x <- f_pad_zero(x, width = max(nchar(x)), pad.char = pad.char)
     out <- paste0(prefix, x)
+
+    if (isTRUE(less.than.replace)){
+        neglocs <- neglocs & grepl('(^[^0-9]*\\s*)(0.?0*)([KBM])', out)
+
+        out <- gsub('(^[^0-9]*\\s*)(0.?0*)([KBM])', '\\1<1\\3', out)
+        out[neglocs] <- gsub('(^[^0-9]*\\s*)(<)(\\d+[KBM])', '\\1>-\\3', out[neglocs])
+
+        mc <- max(nchar(out[!grepl('(>|<)', out)]))
+        repls <- out[grepl('(>|<)', out) & nchar(out) > mc]
+
+        if (length(repls) > 0) {
+            repls <- strsplit(sub('\\s+', 'splitherenumform', repls), 'splitherenumform')
+            out[grepl('(>|<)', out) & nchar(out) > mc] <- unlist(lapply(repls, function(x){
+                tms <- mc - nchar(paste(x, collapse =''))
+                if (tms > 0){
+                    spc <- paste(rep(' ', ), collapse = '')
+                } else {
+                    spc <- ''
+                }
+                paste0(x[1], spc, x[2])
+            }))
+        }
+
+    }
+
     out[nas] <- NA
     out
 }
@@ -154,10 +269,10 @@ ff_bills <- functionize(f_bills)
 #' @export
 #' @rdname f_denom
 f_mills <- function(x, relative = 0, digits = -6, prefix = "",
-    pad.char = ifelse(prefix == '', NA, ' '), ...) {
+    pad.char = ifelse(prefix == '', NA, ' '), less.than.replace = FALSE, ...) {
 
     #if (missing(pad.char)) pad.char <- ifelse(prefix == '', NA, ' ')
-
+    neglocs <- x < 0
     digits <- digits + relative
     nas <- is.na(x)
 
@@ -173,6 +288,31 @@ f_mills <- function(x, relative = 0, digits = -6, prefix = "",
     x <- ifelse(x == '.', '0M', x)
     if (!is.na(pad.char)) x <- f_pad_zero(x, width = max(nchar(x)), pad.char = pad.char)
     out <- paste0(prefix, x)
+
+    if (isTRUE(less.than.replace)){
+        neglocs <- neglocs & grepl('(^[^0-9]*\\s*)(0.?0*)([KBM])', out)
+
+        out <- gsub('(^[^0-9]*\\s*)(0.?0*)([KBM])', '\\1<1\\3', out)
+        out[neglocs] <- gsub('(^[^0-9]*\\s*)(<)(\\d+[KBM])', '\\1>-\\3', out[neglocs])
+
+        mc <- max(nchar(out[!grepl('(>|<)', out)]))
+        repls <- out[grepl('(>|<)', out) & nchar(out) > mc]
+
+        if (length(repls) > 0) {
+            repls <- strsplit(sub('\\s+', 'splitherenumform', repls), 'splitherenumform')
+            out[grepl('(>|<)', out) & nchar(out) > mc] <- unlist(lapply(repls, function(x){
+                tms <- mc - nchar(paste(x, collapse =''))
+                if (tms > 0){
+                    spc <- paste(rep(' ', ), collapse = '')
+                } else {
+                    spc <- ''
+                }
+                paste0(x[1], spc, x[2])
+            }))
+        }
+
+    }
+
     out[nas] <- NA
     out
 }
@@ -189,10 +329,10 @@ ff_mills <- functionize(f_mills)
 #' @export
 #' @rdname f_denom
 f_thous <- function(x, relative = 0, digits = -3, prefix = "",
-    pad.char = ifelse(prefix == '', NA, ' '), ...) {
+    pad.char = ifelse(prefix == '', NA, ' '), less.than.replace = FALSE, ...) {
 
     #if (missing(pad.char)) pad.char <- ifelse(prefix == '', NA, ' ')
-
+    neglocs <- x < 0
     digits <- digits + relative
     nas <- is.na(x)
 
@@ -205,9 +345,35 @@ f_thous <- function(x, relative = 0, digits = -3, prefix = "",
 
     digit_warn(x, 'f_mills', 3)
 
-    x <- ifelse(x == '.', '0k', x)
+    x <- ifelse(x == '.', '0K', x)
+
     if (!is.na(pad.char)) x <- f_pad_zero(x, width = max(nchar(x)), pad.char = pad.char)
     out <- paste0(prefix, x)
+
+    if (isTRUE(less.than.replace)){
+        neglocs <- neglocs & grepl('(^[^0-9]*\\s*)(0.?0*)([KBM])', out)
+
+        out <- gsub('(^[^0-9]*\\s*)(0.?0*)([KBM])', '\\1<1\\3', out)
+        out[neglocs] <- gsub('(^[^0-9]*\\s*)(<)(\\d+[KBM])', '\\1>-\\3', out[neglocs])
+
+        mc <- max(nchar(out[!grepl('(>|<)', out)]))
+        repls <- out[grepl('(>|<)', out) & nchar(out) > mc]
+
+        if (length(repls) > 0) {
+            repls <- strsplit(sub('\\s+', 'splitherenumform', repls), 'splitherenumform')
+            out[grepl('(>|<)', out) & nchar(out) > mc] <- unlist(lapply(repls, function(x){
+                tms <- mc - nchar(paste(x, collapse =''))
+                if (tms > 0){
+                    spc <- paste(rep(' ', ), collapse = '')
+                } else {
+                    spc <- ''
+                }
+                paste0(x[1], spc, x[2])
+            }))
+        }
+
+    }
+
     out[nas] <- NA
     out
 }

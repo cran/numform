@@ -6,7 +6,7 @@ numform
 Status](https://travis-ci.org/trinker/numform.svg?branch=master)](https://travis-ci.org/trinker/numform)
 [![Coverage
 Status](https://coveralls.io/repos/trinker/numform/badge.svg?branch=master)](https://coveralls.io/r/trinker/numform?branch=master)
-[![](http://cranlogs.r-pkg.org/badges/numform)](https://cran.r-project.org/package=numform)
+[![](https://cranlogs.r-pkg.org/badges/numform)](https://cran.r-project.org/package=numform)
 
 **numform** contains tools to assist in the formatting of numbers and
 plots for publication. Tools include the removal of leading zeros,
@@ -73,24 +73,24 @@ arguments but returns a function instead. This is useful for passing in
 to **ggplot2** `scale_x/y_type` functions (see [Plotting](#plotting) for
 usage).
 
-<!-- html table generated in R 3.4.2 by xtable 1.8-2 package -->
-<!-- Tue Dec 12 11:05:41 2017 -->
+<!-- html table generated in R 3.5.1 by xtable 1.8-3 package -->
+<!-- Fri Nov 02 22:08:39 2018 -->
 <table>
 <tr>
 <td>
 alignment
 </td>
 <td>
-f_bills
+f_byte
 </td>
 <td>
-f_longitude
+f_latitude
 </td>
 <td>
-f_prefix
+f_peta
 </td>
 <td>
-f_weekday
+f_wrap
 </td>
 </tr>
 <tr>
@@ -101,27 +101,10 @@ as_factor
 f_celcius
 </td>
 <td>
-f_mean_sd
+f_list
 </td>
 <td>
-f_prop2percent
-</td>
-<td>
-f_wrap
-</td>
-</tr>
-<tr>
-<td>
-constant_months
-</td>
-<td>
-f_comma
-</td>
-<td>
-f_mills
-</td>
-<td>
-f_pval
+f_pp
 </td>
 <td>
 f_year
@@ -129,16 +112,50 @@ f_year
 </tr>
 <tr>
 <td>
+collapse
+</td>
+<td>
+f_comma
+</td>
+<td>
+f_list_amp
+</td>
+<td>
+f_prefix
+</td>
+<td>
+f_yotta
+</td>
+</tr>
+<tr>
+<td>
+constant_months
+</td>
+<td>
+f_data
+</td>
+<td>
+f_logical
+</td>
+<td>
+f_prop2percent
+</td>
+<td>
+f_zetta
+</td>
+</tr>
+<tr>
+<td>
 constant_months_abbreviation
 </td>
 <td>
-f_date
+f_data_abbreviation
 </td>
 <td>
-f_month
+f_longitude
 </td>
 <td>
-f_quarter
+f_pval
 </td>
 <td>
 fv_num_percent
@@ -149,13 +166,13 @@ fv_num_percent
 constant_quarters
 </td>
 <td>
-f_degree
+f_date
 </td>
 <td>
-f_num
+f_mean_sd
 </td>
 <td>
-f_replace
+f_quarter
 </td>
 <td>
 fv_percent
@@ -166,16 +183,33 @@ fv_percent
 constant_weekdays
 </td>
 <td>
-f_denom
+f_degree
 </td>
 <td>
-f_num_percent
+f_mega
 </td>
 <td>
-f_sign
+f_replace
 </td>
 <td>
 fv_percent_diff
+</td>
+</tr>
+<tr>
+<td>
+constant_weekdays_abbreviation
+</td>
+<td>
+f_denom
+</td>
+<td>
+f_mills
+</td>
+<td>
+f_response
+</td>
+<td>
+fv_percent_diff_fixed_relative
 </td>
 </tr>
 <tr>
@@ -186,13 +220,13 @@ f_12_hour
 f_dollar
 </td>
 <td>
-f_ordinal
+f_month
 </td>
 <td>
-f_state
+f_sign
 </td>
 <td>
-fv_runs
+fv_percent_lead
 </td>
 </tr>
 <tr>
@@ -200,15 +234,16 @@ fv_runs
 f_abbreviation
 </td>
 <td>
-f_fahrenheit
+f_exa
 </td>
 <td>
-f_pad_zero
+f_month_abbreviation
 </td>
 <td>
-f_suffix
+f_state
 </td>
 <td>
+fv_percent_lead_fixed_relative
 </td>
 </tr>
 <tr>
@@ -216,15 +251,16 @@ f_suffix
 f_affirm
 </td>
 <td>
-f_latitude
+f_fahrenheit
 </td>
 <td>
-f_parenthesis
+f_month_name
 </td>
 <td>
-f_thous
+f_suffix
 </td>
 <td>
+fv_runs
 </td>
 </tr>
 <tr>
@@ -232,13 +268,95 @@ f_thous
 f_affix
 </td>
 <td>
-f_logical
+f_giga
+</td>
+<td>
+f_num
+</td>
+<td>
+f_tera
+</td>
+<td>
+glue
+</td>
+</tr>
+<tr>
+<td>
+f_bills
+</td>
+<td>
+f_interval
+</td>
+<td>
+f_num_percent
+</td>
+<td>
+f_thous
+</td>
+<td>
+highlight_cells
+</td>
+</tr>
+<tr>
+<td>
+f_bin
+</td>
+<td>
+f_interval_right
+</td>
+<td>
+f_ordinal
+</td>
+<td>
+f_title
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+f_bin_right
+</td>
+<td>
+f_interval_text
+</td>
+<td>
+f_pad_zero
+</td>
+<td>
+f_weekday
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+f_bin_text
+</td>
+<td>
+f_interval_text_right
+</td>
+<td>
+f_parenthesis
+</td>
+<td>
+f_weekday_abbreviation
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+f_bin_text_right
+</td>
+<td>
+f_kilo
 </td>
 <td>
 f_percent
 </td>
 <td>
-f_title
+f_weekday_name
 </td>
 <td>
 </td>
@@ -631,6 +749,219 @@ alignment.
 </tbody>
 </table>
 
+    if (!require("pacman")) install.packages("pacman")
+    pacman::p_load(tidyverse)
+
+    set.seed(11)
+    data_frame(
+        date = sample(seq(as.Date("1990/1/1"), by = "day", length.out = 2e4), 12)
+    ) %>%
+        mutate(
+            year_4 = f_year(date, 4),
+            year_2 = f_year(date, 2),
+            quarter = f_quarter(date),
+            month_name = f_month_name(date) %>%
+                as_factor(),
+            month_abbreviation = f_month_abbreviation(date) %>%
+                as_factor(),
+            month_short = f_month(date),
+            weekday_name = f_weekday_name(date),
+            weekday_abbreviation = f_weekday_abbreviation(date),
+           weekday_short = f_weekday(date),
+            weekday_short_distinct = f_weekday(date, distinct = TRUE)
+        ) %>%
+        data.frame(stringsAsFactors = FALSE, check.names = FALSE) %>%
+        pander::pander(split.tables = Inf, justify = alignment(.))
+
+<table>
+<colgroup>
+<col width="7%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="7%" />
+<col width="12%" />
+<col width="8%" />
+<col width="8%" />
+<col width="13%" />
+<col width="9%" />
+<col width="14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">date</th>
+<th align="right">year_4</th>
+<th align="right">year_2</th>
+<th align="left">quarter</th>
+<th align="left">month_name</th>
+<th align="left">month_abbreviation</th>
+<th align="left">month_short</th>
+<th align="left">weekday_name</th>
+<th align="left">weekday_abbreviation</th>
+<th align="left">weekday_short</th>
+<th align="left">weekday_short_distinct</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2005-03-07</td>
+<td align="right">2005</td>
+<td align="right">05</td>
+<td align="left">Q1</td>
+<td align="left">March</td>
+<td align="left">Mar</td>
+<td align="left">M</td>
+<td align="left">Monday</td>
+<td align="left">Mon</td>
+<td align="left">M</td>
+<td align="left">M</td>
+</tr>
+<tr class="even">
+<td align="right">1990-01-11</td>
+<td align="right">1990</td>
+<td align="right">90</td>
+<td align="left">Q1</td>
+<td align="left">January</td>
+<td align="left">Jan</td>
+<td align="left">J</td>
+<td align="left">Thursday</td>
+<td align="left">Thu</td>
+<td align="left">T</td>
+<td align="left">Th</td>
+</tr>
+<tr class="odd">
+<td align="right">2017-12-16</td>
+<td align="right">2017</td>
+<td align="right">17</td>
+<td align="left">Q4</td>
+<td align="left">December</td>
+<td align="left">Dec</td>
+<td align="left">D</td>
+<td align="left">Saturday</td>
+<td align="left">Sat</td>
+<td align="left">S</td>
+<td align="left">S</td>
+</tr>
+<tr class="even">
+<td align="right">1990-10-08</td>
+<td align="right">1990</td>
+<td align="right">90</td>
+<td align="left">Q4</td>
+<td align="left">October</td>
+<td align="left">Oct</td>
+<td align="left">O</td>
+<td align="left">Monday</td>
+<td align="left">Mon</td>
+<td align="left">M</td>
+<td align="left">M</td>
+</tr>
+<tr class="odd">
+<td align="right">1993-07-17</td>
+<td align="right">1993</td>
+<td align="right">93</td>
+<td align="left">Q3</td>
+<td align="left">July</td>
+<td align="left">Jul</td>
+<td align="left">J</td>
+<td align="left">Saturday</td>
+<td align="left">Sat</td>
+<td align="left">S</td>
+<td align="left">S</td>
+</tr>
+<tr class="even">
+<td align="right">2042-04-10</td>
+<td align="right">2042</td>
+<td align="right">42</td>
+<td align="left">Q2</td>
+<td align="left">April</td>
+<td align="left">Apr</td>
+<td align="left">A</td>
+<td align="left">Thursday</td>
+<td align="left">Thu</td>
+<td align="left">T</td>
+<td align="left">Th</td>
+</tr>
+<tr class="odd">
+<td align="right">1994-09-26</td>
+<td align="right">1994</td>
+<td align="right">94</td>
+<td align="left">Q3</td>
+<td align="left">September</td>
+<td align="left">Sep</td>
+<td align="left">S</td>
+<td align="left">Monday</td>
+<td align="left">Mon</td>
+<td align="left">M</td>
+<td align="left">M</td>
+</tr>
+<tr class="even">
+<td align="right">2005-11-15</td>
+<td align="right">2005</td>
+<td align="right">05</td>
+<td align="left">Q4</td>
+<td align="left">November</td>
+<td align="left">Nov</td>
+<td align="left">N</td>
+<td align="left">Tuesday</td>
+<td align="left">Tue</td>
+<td align="left">T</td>
+<td align="left">T</td>
+</tr>
+<tr class="odd">
+<td align="right">2038-03-16</td>
+<td align="right">2038</td>
+<td align="right">38</td>
+<td align="left">Q1</td>
+<td align="left">March</td>
+<td align="left">Mar</td>
+<td align="left">M</td>
+<td align="left">Tuesday</td>
+<td align="left">Tue</td>
+<td align="left">T</td>
+<td align="left">T</td>
+</tr>
+<tr class="even">
+<td align="right">1996-09-29</td>
+<td align="right">1996</td>
+<td align="right">96</td>
+<td align="left">Q3</td>
+<td align="left">September</td>
+<td align="left">Sep</td>
+<td align="left">S</td>
+<td align="left">Sunday</td>
+<td align="left">Sun</td>
+<td align="left">S</td>
+<td align="left">Su</td>
+</tr>
+<tr class="odd">
+<td align="right">1999-08-02</td>
+<td align="right">1999</td>
+<td align="right">99</td>
+<td align="left">Q3</td>
+<td align="left">August</td>
+<td align="left">Aug</td>
+<td align="left">A</td>
+<td align="left">Monday</td>
+<td align="left">Mon</td>
+<td align="left">M</td>
+<td align="left">M</td>
+</tr>
+<tr class="even">
+<td align="right">2014-02-14</td>
+<td align="right">2014</td>
+<td align="right">14</td>
+<td align="left">Q1</td>
+<td align="left">February</td>
+<td align="left">Feb</td>
+<td align="left">F</td>
+<td align="left">Friday</td>
+<td align="left">Fri</td>
+<td align="left">F</td>
+<td align="left">F</td>
+</tr>
+</tbody>
+</table>
+
 Plotting
 --------
 
@@ -682,21 +1013,21 @@ Plotting
             )
 
     ## # A tibble: 10,000 x 8
-    ##     revenue       date   site   dollar thous thous_dollars abb_month
-    ##       <dbl>     <date>  <chr>    <chr> <chr>         <chr>     <chr>
-    ##  1 449648.3 1999-11-29 Site 1 $501,000  501K         $501K         N
-    ##  2 560514.4 1999-07-07 Site 4 $491,000  491K         $491K         J
-    ##  3 438891.5 1999-08-06 Site 2 $431,000  431K         $431K         A
-    ##  4 528542.6 1999-05-04 Site 3 $470,000  470K         $470K         M
-    ##  5 462758.3 1999-07-08 Site 4 $515,000  515K         $515K         J
-    ##  6 553878.7 1999-07-22 Site 2 $519,000  519K         $519K         J
-    ##  7 473985.2 1999-05-20 Site 2 $440,000  440K         $440K         M
-    ##  8 533825.2 1999-05-28 Site 5 $482,000  482K         $482K         M
-    ##  9 426124.4 1999-01-15 Site 2 $419,000  419K         $419K         J
-    ## 10 406613.1 1999-08-19 Site 3 $487,000  487K         $487K         A
-    ## # ... with 9,990 more rows, and 1 more variables: abb_week <fctr>
+    ##    revenue date       site   dollar thous thous_dollars abb_month abb_week
+    ##      <dbl> <date>     <chr>  <chr>  <chr> <chr>         <chr>     <fct>   
+    ##  1 591213. 1999-11-29 Site 1 $501,~ 501K  $501K         N         M       
+    ##  2 468126. 1999-07-07 Site 4 $491,~ 491K  $491K         J         W       
+    ##  3 376229. 1999-08-06 Site 2 $431,~ 431K  $431K         A         F       
+    ##  4 537861. 1999-05-04 Site 3 $470,~ 470K  $470K         M         T       
+    ##  5 462758. 1999-07-08 Site 4 $515,~ 515K  $515K         J         Th      
+    ##  6 553879. 1999-07-22 Site 2 $519,~ 519K  $519K         J         Th      
+    ##  7 473985. 1999-05-20 Site 2 $440,~ 440K  $440K         M         Th      
+    ##  8 480609. 1999-05-28 Site 5 $482,~ 482K  $482K         M         F       
+    ##  9 363462. 1999-01-15 Site 2 $419,~ 419K  $419K         J         F       
+    ## 10 406613. 1999-08-19 Site 3 $487,~ 487K  $487K         A         Th      
+    ## # ... with 9,990 more rows
 
-![](tools/figure/unnamed-chunk-14-1.png)
+![](tools/figure/unnamed-chunk-15-1.png)
 
     library(tidyverse); library(viridis)
 
@@ -754,7 +1085,7 @@ Plotting
                 ), width = 85, collapse = TRUE)
             )
 
-![](tools/figure/unnamed-chunk-15-1.png)
+![](tools/figure/unnamed-chunk-16-1.png)
 
     library(tidyverse); library(gridExtra)
 
@@ -828,7 +1159,7 @@ Plotting
 
     )
 
-![](tools/figure/unnamed-chunk-16-1.png)
+![](tools/figure/unnamed-chunk-17-1.png)
 
     set.seed(10)
     dat <- data_frame(
@@ -857,7 +1188,7 @@ Plotting
                 subtitle = 'Subtitles: For that extra professional look.'
             )
 
-![](tools/figure/unnamed-chunk-17-1.png)
+![](tools/figure/unnamed-chunk-18-1.png)
 
     library(tidyverse); library(viridis)
 
@@ -891,7 +1222,7 @@ Plotting
                 panel.grid.major.x = element_blank()
             )
 
-![](tools/figure/unnamed-chunk-18-1.png)
+![](tools/figure/unnamed-chunk-19-1.png)
 
     library(tidyverse); library(maps)
 
@@ -902,7 +1233,48 @@ Plotting
         scale_y_continuous(labels = f_latitude) +
         scale_x_continuous(labels = f_longitude)
 
-![](tools/figure/unnamed-chunk-19-1.png)
+![](tools/figure/unnamed-chunk-20-1.png)
+
+    mtcars %>%
+        mutate(mpg2 = cut(mpg, 10, right = FALSE)) %>%
+        ggplot(aes(mpg2)) +
+            geom_bar(fill = '#33A1DE') +
+            scale_x_discrete(labels = function(x) f_wrap(f_bin_text_right(x, l = 'up to'), width = 8)) +
+            scale_y_continuous(breaks = seq(0, 14, by = 2), limits = c(0, 7)) +
+            theme_minimal() +
+            theme(
+                panel.grid.major.x = element_blank(),
+                axis.text.x = element_text(size = 14, margin = margin(t = -12)),
+                axis.text.y = element_text(size = 14),
+                plot.title = element_text(hjust = .5)
+            ) +
+            labs(title = 'Histogram', x = NULL, y = NULL)
+
+![](tools/figure/unnamed-chunk-21-1.png)
+
+    dat <- data_frame(
+        Value = c(111, 2345, 34567, 456789, 1000001, 1000000001),
+        Time = 1:6
+    )
+
+    gridExtra::grid.arrange(
+        
+        ggplot(dat, aes(Time, Value)) +
+            geom_line() +
+            scale_y_continuous(labels = ff_denom( prefix = '$')) +
+            labs(title = "Single Denominational Unit"),
+        
+        ggplot(dat, aes(Time, Value)) +
+            geom_line() +
+            scale_y_continuous(
+                labels = ff_denom(mix.denom = TRUE, prefix = '$', pad.char = '')
+            ) +
+            labs(title = "Mixed Denominational Unit"),
+        
+        ncol = 2
+    )
+
+![](tools/figure/unnamed-chunk-22-1.png)
 
 Modeling
 --------

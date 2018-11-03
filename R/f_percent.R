@@ -1,14 +1,14 @@
 #' Format Percentages
 #'
-#' \code{f_percent} - A wraf_percenter for \code{\link[numform]{f_num}} that formats
+#' \code{f_percent} - A wrapper for \code{\link[numform]{f_num}} that formats
 #' percent values as labeled percentages.
 #'
 #' @param x A vector of proportions.
 #' @param digits The number of digits to use.  Defaults to 1.  Can be set
 #' globally via: \code{options(numformdigits = n)} where n is the number of
 #' digits beyond the decimal point to include.
-#' @param less_than_replace logical.  If \code{TRUE} values lower than lowest
-#' place value, specified by \code{digits}, will be replaces with a less than
+#' @param less.than.replace logical.  If \code{TRUE} values lower than lowest
+#' place value, specified by \code{digits}, will be replaced with a less than
 #' sign followed by the \code{double} representation of the place value
 #' specified by \code{digits}.  For example, if \code{digits = 0} then
 #' replacement will be \code{"<1\%"} or if \code{digits = 2} then replacement will
@@ -23,10 +23,11 @@
 #' f_percent(c(30, 33.45, .1), 1)
 #' f_percent(c(0.0, 0, .2, -00.02, 1.122222, pi))
 #' f_prop2percent(c(.30, 1, 1.01, .33, .222, .01))
+#' f_pp(c(.30, 1, 1.01, .33, .222, .01))
 #'
-#' f_percent(c(30, 33.45, .1), digits = 0, less_than_replace = TRUE)
+#' f_percent(c(30, 33.45, .1), digits = 0, less.than.replace = TRUE)
 #' f_prop2percent(c(.30, 1, 1.01, .33, .222, .01, .0001, NA), digits = 0,
-#'     less_than_replace = TRUE)
+#'     less.than.replace = TRUE)
 #'
 #' \dontrun{
 #' if (!require("pacman")) install.packages("pacman")
@@ -41,14 +42,15 @@
 #'         facet_wrap(~cyl, ncol = 1) +
 #'         scale_y_continuous(labels = ff_prop2percent(digits = 0))
 #' }
-f_percent <- function(x, digits = getOption("numformdigits"), less_than_replace = FALSE, ...) {
+f_percent <- function(x, digits = getOption("numformdigits"), less.than.replace = FALSE, ...) {
 
     out <- f_num(x, digits = digits, s="%", ...)
 
-    if (isTRUE(less_than_replace)){
+    if (isTRUE(less.than.replace)){
         if (is.null(digits)) digits <- 1
         repl <- replace_less_than(digits, percent = TRUE)
-        out[x < repl[['prop_cut']]] <- repl[['replacement']]
+        out[x < repl[['prop_cut']][1] & x >= 0] <- repl[['replacement']][1]
+        out[x > repl[['prop_cut']][2] & x < 0] <- repl[['replacement']][2]
     }
 
     out
@@ -67,14 +69,15 @@ ff_percent <- functionize(f_percent)
 #'
 #' @rdname f_percent
 #' @export
-f_prop2percent <- function(x, digits = getOption("numformdigits"), less_than_replace = FALSE, ...) {
+f_prop2percent <- function(x, digits = getOption("numformdigits"), less.than.replace = FALSE, ...) {
 
     out <- f_num(100*x, digits = digits, s="%", ...)
 
-    if (isTRUE(less_than_replace)){
+    if (isTRUE(less.than.replace)){
         if (is.null(digits)) digits <- 1
         repl <- replace_less_than(digits, percent = FALSE)
-        out[x < repl[['prop_cut']]] <- repl[['replacement']]
+        out[x < repl[['prop_cut']][1] & x >= 0] <- repl[['replacement']][1]
+        out[x > repl[['prop_cut']][2] & x < 0] <- repl[['replacement']][2]
     }
 
     out
@@ -87,11 +90,34 @@ f_prop2percent <- function(x, digits = getOption("numformdigits"), less_than_rep
 #' @rdname f_percent
 ff_prop2percent <- functionize(f_prop2percent)
 
+#' Format Percentages
+#'
+#' \code{f_pp} - A wrapper for \code{\link[numform]{f_prop2percent}} that requires
+#' less typing and has \code{digits} set to \code{0} by default.
+#'
+#' @export
+#' @include utils.R
+#' @rdname f_percent
+f_pp <- hijack(f_prop2percent, digits = 0)
 
-replace_less_than <- function(digits = 0, prefix = "<", percent = FALSE, ...){
+
+#' @export
+#' @include utils.R
+#' @rdname f_percent
+ff_pp <- functionize(f_pp)
+
+
+
+
+replace_less_than <- function(digits = 0, prefix = c("<", ">-"), percent = FALSE, ...){
 
     if(percent) div <- 1 else div <- 1e2
     cut <- 1/(10^digits)
-    list(prop_cut = (cut)/div, replacement = f_percent(cut, digits = digits, prefix = prefix))
+    list(prop_cut = c((cut)/div, -(cut)/div), replacement = f_percent(cut, digits = digits, prefix = prefix))
 
 }
+
+
+
+
+
