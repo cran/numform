@@ -25,8 +25,9 @@
 #'
 #'
 #' \dontrun{
-#' ## pander
-#' pacman::p_load(dplyr, pander)
+#' library(dplyr)
+#' library(pander)
+#' library(xtable)
 #'
 #' set.seed(10)
 #' dat <- data_frame(
@@ -59,8 +60,6 @@
 #'     as.data.frame() %>%
 #'     pander::pander(split.tables = Inf, justify = alignment(.))
 #'
-#' ## xtable
-#' pacman::p_load(xtable)
 #'
 #' alignment(CO, 'l', 'r')
 #'
@@ -74,7 +73,11 @@
 #'     print(include.rownames = FALSE)
 #' }
 alignment <- function(x, left = 'left', right = ifelse(left == 'l', 'r', 'right'),
-    additional.numeric = "^((<b>(&ndash;|\\+)</b>)|(<?([0-9.%-]+)|(\\$?\\s*\\d+[KBM])))$", sep = NULL, ...){
+    additional.numeric = paste0(
+        '^((<b>(&ndash;|\\+)</b>)|(<?([0-9.%-]+)',
+        '|(\\$?\\s*\\d+[KBM])))|(NaN|NA|Inf)$'
+    ),
+    sep = NULL, ...){
 
     stopifnot(is.data.frame(x))
 
@@ -91,11 +94,11 @@ right_align <- function(df, additional.numeric = NULL){
         x <- as.character(x)
         if (!is.null(additional.numeric)) numregex <- paste(paste0('(', unlist(c(numregex, additional.numeric, additional.numeric)), ')'), collapse = "|")
 
-        grepl(numregex, trimws(rm_na(x)[1]))
+        grepl(numregex, trimws(rm_na(x)[1]), perl = TRUE) & !grepl('^-*\\s*$', trimws(rm_na(x)[1]), perl = TRUE)
     })))
 }
 
 
 numregex <- '^((((\\$)?[0-9.,+-]+( ?%|[KMB])?)|([0-9/:.-T ]{5,}))|(-?[0-9.]+(&deg;)?[WESNFC]?))$'
-
+# numregex <- "^(?!.*((^-*\\s*$)))(?=.*(^((((\\$)?[0-9.,+-]+( ?%|[KMB])?)|([0-9/:.-T ]{5,}))|(-?[0-9.]+(&deg;)?[WESNFC]?))$))"
 

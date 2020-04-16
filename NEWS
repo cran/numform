@@ -17,6 +17,31 @@ And constructed with the following guidelines:
 * Bug fixes and misc changes bumps the patch
 
 
+numform 0.5.1 - 0.6.0
+----------------------------------------------------------------
+
+BUG FIXES
+
+* `f_denom` functions did not properly handle scientific notation.  Spotted by
+  Wilfried N'Guessan (see #23).
+
+NEW FEATURES
+
+* `f_text_bar` added to convert numeric vectors into an ASCII horizontal bar
+  plot representation.
+
+MINOR FEATURES
+
+* `f_denom` picks up a functionality to the 100 trillions.
+
+IMPROVEMENTS
+
+* The sub-expression '(NaN|NA|Inf)' added to additional numeric
+  (`additional.numeric` argument) of the `allignment()` function.
+
+CHANGES
+
+
 
 numform 0.4.1 - 0.5.0
 ----------------------------------------------------------------
