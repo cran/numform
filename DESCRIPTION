@@ -1,6 +1,6 @@
 Package: numform
 Title: Tools to Format Numbers for Publication
-Version: 0.6.0
+Version: 0.6.4
 Authors@R: c(person("Tyler", "Rinker", email = "tyler.rinker@gmail.com", role = c("aut", "cre")))
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
 Description: Format numbers and plots for publication; includes the removal of leading zeros,
@@ -13,7 +13,7 @@ Suggests: testthat
 Imports: glue
 License: GPL-2
 LazyData: TRUE
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Collate: 'alignment.R' 'as_factor.R' 'constants.R' 'f_12_hour.R'
         'utils.R' 'f_abbreviation.R' 'f_affirm.R' 'f_affix.R' 'f_bin.R'
         'f_comma.R' 'f_data.R' 'f_date.R' 'f_degree.R' 'f_denom.R'
@@ -23,9 +23,10 @@ Collate: 'alignment.R' 'as_factor.R' 'constants.R' 'f_12_hour.R'
         'f_text_bar.R' 'f_title.R' 'f_weekday.R' 'f_wrap.R' 'f_year.R'
         'fv_num_percent.R' 'fv_percent.R' 'fv_percent_diff.R'
         'fv_percent_lead.R' 'fv_runs.R' 'glue-reexports.R'
-        'highlight_cells.R' 'numform-package.R'
+        'highlight_cells.R' 'numform-package.R' 'round.R'
+        'time_digits.R'
 NeedsCompilation: no
-Packaged: 2020-04-16 20:02:23 UTC; trinker
+Packaged: 2020-09-26 22:10:18 UTC; trinker
 Author: Tyler Rinker [aut, cre]
 Repository: CRAN
-Date/Publication: 2020-04-16 21:30:03 UTC
+Date/Publication: 2020-09-27 16:50:03 UTC
