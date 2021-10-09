@@ -1,6 +1,6 @@
 Package: numform
 Title: Tools to Format Numbers for Publication
-Version: 0.6.4
+Version: 0.7.0
 Authors@R: c(person("Tyler", "Rinker", email = "tyler.rinker@gmail.com", role = c("aut", "cre")))
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
 Description: Format numbers and plots for publication; includes the removal of leading zeros,
@@ -12,8 +12,9 @@ Depends: R (>= 3.2.0)
 Suggests: testthat
 Imports: glue
 License: GPL-2
-LazyData: TRUE
-RoxygenNote: 7.1.1
+URL: https://github.com/trinker/numform
+BugReports: https://github.com/trinker/numform/issues
+RoxygenNote: 7.1.2
 Collate: 'alignment.R' 'as_factor.R' 'constants.R' 'f_12_hour.R'
         'utils.R' 'f_abbreviation.R' 'f_affirm.R' 'f_affix.R' 'f_bin.R'
         'f_comma.R' 'f_data.R' 'f_date.R' 'f_degree.R' 'f_denom.R'
@@ -26,7 +27,7 @@ Collate: 'alignment.R' 'as_factor.R' 'constants.R' 'f_12_hour.R'
         'highlight_cells.R' 'numform-package.R' 'round.R'
         'time_digits.R'
 NeedsCompilation: no
-Packaged: 2020-09-26 22:10:18 UTC; trinker
+Packaged: 2021-10-08 20:14:18 UTC; TylerRinker
 Author: Tyler Rinker [aut, cre]
 Repository: CRAN
-Date/Publication: 2020-09-27 16:50:03 UTC
+Date/Publication: 2021-10-09 21:10:12 UTC
